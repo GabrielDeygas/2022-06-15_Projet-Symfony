@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Ajout de logements{% endblock %}
+
+{% block body %}
+    <h2 class="container">
+        Ajouter des logements
+    </h2>
+    <div class="container">
+        {{ form_start(form) }}
+        <div class="row">
+
+        </div>
+
+        {{ form_rest(form) }}
+        <div class="row text-center">
+            <button type="submit" class="btn btn-info btn-sm">Enregistrer</button>
+        </div>
+        {{ form_end(form) }}
+    </div>
+{%  endblock %}

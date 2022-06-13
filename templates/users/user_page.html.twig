@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+{% endblock %}
+
+
+{% block body %}
+
+    <div class="container row">
+        <div class="col-sm-3 mt-3">
+            {{ include("front/template_part/_menu.html.twig") }}
+        </div>
+        <div class="col-sm-9">
+            <h2 class="container text-center mb-3 mt-3">Nos logements</h2>
+            <div class="row d-flex flex-row justify-content-between">
+
+                {% for lodging in lodgings %}
+
+                <div class="card mb-2 d-inline-block">
+                    <div class="card-body">
+
+                        {% set leftDays = 0 %}
+
+                        <h4 class="card-title text-center">{{ lodging.name }} </h4>
+                        <div class="card-text text-center">
+                            <img src="{{ lodging.picPath }}" alt="" width="90%" height="350px" class="mt-1 mb-1">
+                            <p>{{ lodging.idTypelodging.type }} - {{ lodging.idTypelodging.places }} personnes -
+                                {{ lodging.idTypelodging.price }}€ la nuit</p>
+
+                            {% for booking in lodging.bookings %}
+
+                                {% set dateArrivee = booking.dateArrival %}
+                                {% set dateDepart = booking.dateDeparture %}
+                                {% set difference = date(dateDepart).diff(date(dateArrivee)) %}
+                                {% set leftDays = leftDays + difference.days %}
+
+                                <p>Réservation N°{{ booking.id }}
+                                    - {{ booking.client.firstName }} {{ booking.client.lastName }} -
+                                    {{ booking.nbAdults }} adulte(s) - {{ booking.nbChildren }} enfant(s) -
+                                    Réservé du {{ booking.dateArrival|date("d/m/Y") }}
+                                    au {{ booking.dateDeparture|date("d/m/Y") }}</p><br>
+
+                            {% endfor %}
+
+                            {% set taxesMultiplier = taxesGain.percent / 100 %}
+                            {% set totalPaid = (lodging.idTypelodging.price * leftDays) * taxesMultiplier %}
+
+                            <p> Jusqu'à présent vous avez gagné {{ totalPaid }} euros sur ce logement </p>
+
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

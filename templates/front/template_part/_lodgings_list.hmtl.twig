@@ -1,0 +1,18 @@
+
+<div class="row d-flex flex-row justify-content-between">
+    {% for lodging in lodgings %}
+        <div class="card mb-2 d-inline-block" style="width: 30%">
+            <div class="card-body">
+                <a class="btn " href="{{ path("app_lodgingsdetails", {id: lodging.id}) }}">
+                <h4 class="card-title">{{ lodging.name }}</h4>
+                <div class="card-text">
+                    <img src="{{ vich_uploader_asset(lodging, 'imageFile') }}" alt="" width="90%" height="150px" class="mt-1 mb-1">
+                    <p>{{ lodging.idTypelodging.type }}</p>
+                    <p>{{ lodging.idTypelodging.places }} personnes</p>
+                    <p>{{ lodging.idTypelodging.price }}€ la nuit</p>
+                </div>
+                </a>
+            </div>
+        </div>
+    {% endfor %}
+</div>

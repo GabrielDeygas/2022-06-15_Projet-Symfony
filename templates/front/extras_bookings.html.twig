@@ -1,0 +1,35 @@
+{% extends "base.html.twig" %}
+
+{% block title %}  {% endblock %}
+
+{% block body %}
+    <div class="container row">
+    <div class="col-sm-3 mt-3">
+        {{ include("front/template_part/_menu.html.twig") }}
+    </div>
+    <div class="col-sm-9">
+        <h2 class="container text-center mb-3 mt-3">{{ lodging.name }}</h2>
+        <div class="row d-flex flex-row justify-content-between">
+            <div class="card-text text-center">
+                <div>
+                    <img src="{{ vich_uploader_asset(lodging, 'imageFile') }}" alt="" width="500" height="350px" class="mt-1 mb-1">
+                    <p>{{ lodging.idTypelodging.type }}</p>
+                    <p>{{ lodging.idTypelodging.places }} personnes</p>
+                    <p>{{ lodging.idTypelodging.price }}€ la nuit</p>
+                </div>
+                <div class="container">
+                    {{ form_start(form) }}
+                    <div class="row d-flex justify-content-center">
+
+                    </div>
+                    {{ form_rest(form) }}
+                    <div class="row text-center">
+                        <button href="{{ path('app_create_extras', {booking: booking}) }}" type="submit" class="btn btn-outline-primary btn-sm">Réserver</button>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

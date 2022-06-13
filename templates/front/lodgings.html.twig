@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+{% block title %} Liste livre {% endblock %}
+
+{% block body %}
+    <div class="container row">
+        <div class="col-sm-3 mt-3">
+            {{ include("front/template_part/_menu.html.twig") }}
+        </div>
+        <div class="col-sm-9">
+    <h2 class="container text-center mb-3 mt-3">Nos logements</h2>
+            <div class="row d-flex flex-row justify-content-between">
+            {{ include("front/template_part/_lodgings_list.hmtl.twig",
+                {lodgings: lodgings}, {typeLodgings: typeLodgings}) }}
+        </div>
+    </div>
+{% endblock %}

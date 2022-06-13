@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+
+{% block title %} Page d'administration {% endblock %}
+
+{% block body %}
+    <div class="container row">
+    <div class="col-sm-3 mt-3">
+        {{ include("front/template_part/_menu.html.twig") }}
+    </div>
+    <div class="col-sm-9">
+        <h2 class="container text-center mb-3 mt-3">Choisissez votre onglet d'administration</h2>
+        <div class="row d-flex flex-row justify-content-between">
+            <li class="list-unstyled ">
+                <a class="btn btn-outline-primary btn-sm mb-2" href="{{ path('app_list_lodgings') }}"> Propriétés </a>
+            </li>
+            <li class="list-unstyled">
+                <a class="btn btn-outline-primary btn-sm mb-2" href="{{ path('app_list_owners') }}"> Propriétaires </a>
+            </li>
+            <li class="list-unstyled">
+                <a class="btn btn-outline-primary btn-sm mb-2" href="{{ path('app_admin') }}"> Réservations </a>
+            </li>
+
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Camping l'Espadrille Volante {% endblock %}
+
+{% block body %}
+    <div class="container row">
+        <div class="col-sm-3 mt-3">
+            {{ include("/front/template_part/_menu.html.twig") }}
+        </div>
+        <div class="col-sm-9">
+    <h2 class="container text-center mb-5 mt-3">Bienvenue à l'Espadrille Volante</h2>
+
+           {% set multiplier = percent[2].percent  %}
+            {% set multiplier = (100 + multiplier) / 100 %}
+
+            <table class="table ms-5">
+                <tbody>
+                <tr>
+                    <th scope="row">Logement</th>
+                    {% for type in lodgingType %}
+                    <td class="text-center"> {{ type.type }} </td>
+                    {% endfor %}
+                </tr>
+
+                <tr>
+                    <th scope="row">Prix hors saison</th>
+                    {% for type in lodgingType %}
+                    <td class="text-center"> {{ type.price }}€ </td>
+                    {% endfor %}
+                </tr>
+
+                <tr>
+                    <th scope="row">Prix estivaux</th>
+                    {% for type in lodgingType %}
+                        <td class="text-center"> {{ type.price * multiplier }}€ </td>
+                    {% endfor %}
+                </tr>
+                </tbody>
+            </table>
+
+            <table class="table ms-5">
+                <tbody>
+                <tr>
+                    <th scope="row"> Extras </th>
+                    {% for extra in extraType %}
+                        <td class="text-center"> {{ extra.label }} </td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <th scope="row"> Prix </th>
+                    {% for extra in extraType %}
+                        <td class="text-center"> {{ extra.price }}€ </td>
+                    {% endfor %}
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Listes des propriétaires{% endblock %}
+
+{% block body %}
+    <h2 class="container">
+        <span class="float-end">
+            <a href="{{ path('app_add_owner') }}" class="btn btn-success btn-sm">Ajout</a>
+        </span>
+        Listes des propriétaires</h2>
+    <div class="container">
+        {% for message in app.flashes('success') %}
+            <div class="row d-flex flex-row justify-content-center mb-2">
+                <div class="alert alert-success">{{ message }}</div>
+            </div>
+        {% endfor %}
+        <ul class="list-group">
+            {% for user in users %}
+                {% if user.typeUser != "ROLE_ADMIN" %}
+                    <li class="list-group-item">
+                    <span class="float-end d-flex flex-row justify-content-end">
+                        <a href="{{ path('app_add_owner') }}"
+                           class="btn btn-outline-warning btn-sm">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                       <form action="{{ path('app_del_owner', {id: user.id}) }}" class="ms-2"
+                             method="post" onsubmit="return confirm('Etes-vous certain ?')">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete'~user.id) }}">
+                            <button type="submit" class="btn btn-outline-danger btn-sm">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </form>
+                    </span>
+
+                        {{ user.id }} {{ user.firstName }} {{ user.lastName }}
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
